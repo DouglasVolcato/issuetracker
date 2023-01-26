@@ -6,8 +6,8 @@ const updateProjectController = require("../controllers/updateProject-controller
 module.exports = function (app) {
   app
     .route("/api/issues/:project")
-    .get(createProjectController(req, res))
-    .post(createProjectController(req, res))
-    .put(updateProjectController(req, res))
-    .delete(deleteProjectController(req, res));
+    .get((req, res) => createProjectController(req, res))
+    .post((req, res) => createProjectController(req, res))
+    .put((req, res) => updateProjectController(req, res))
+    .delete((req, res) => deleteProjectController(req, res));
 };
