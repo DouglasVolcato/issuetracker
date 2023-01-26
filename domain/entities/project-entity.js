@@ -1,4 +1,4 @@
-import { v4 } from "uuid";
+const v4 = require("uuid").v4;
 
 module.exports = class {
   constructor(projectData) {
