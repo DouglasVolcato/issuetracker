@@ -5,6 +5,7 @@ const updateProjectRepository = require("../infra/repositories/project/updatePro
 module.exports = async function (projectData) {
   const foundProject = await getProjectByIdRepository(projectData._id);
   const update = new ProjectEntity(projectData);
+  update.validateFieldsUpdate();
   const updatedBody = update.getUpdateBody(foundProject);
   return await updateProjectRepository(updatedBody);
 };

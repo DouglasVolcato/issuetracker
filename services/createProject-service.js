@@ -3,6 +3,6 @@ const createProjectRepository = require("../infra/repositories/project/createPro
 
 module.exports = async function (project) {
   const newProject = new ProjectEntity(project);
-  newProject.validateFields();
+  newProject.validateFieldsCreation();
   return await createProjectRepository(newProject.getProject());
 };

@@ -5,15 +5,30 @@ module.exports = class {
     this.projectData = projectData;
   }
 
-  validateFields() {
-    if (!this.projectData.issue_title) {
-      throw new Error("Missing project title.");
+  validateFieldsCreation() {
+    if (
+      !this.projectData.issue_title ||
+      !this.projectData.issue_text ||
+      !this.projectData.created_by
+    ) {
+      throw new Error("required field(s) missing");
     }
-    if (!this.projectData.issue_text) {
-      throw new Error("Missing project text.");
+    return;
+  }
+
+  validateFieldsUpdate() {
+    if (!this.projectData._id) {
+      throw new Error("missing _id");
     }
-    if (!this.projectData.created_by) {
-      throw new Error("Missing project author name.");
+    if (
+      !this.projectData.issue_title &&
+      !this.projectData.issue_text &&
+      this.projectData.created_by &&
+      this.projectData.assigned_to &&
+      this.projectData.open &&
+      this.projectData.status_text
+    ) {
+      throw new Error("no update field(s) sent");
     }
     return;
   }
