@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 
-export default class ProjectEntity {
+module.exports = class {
   constructor(projectData) {
     this.projectData = projectData;
   }
@@ -48,4 +48,4 @@ export default class ProjectEntity {
       status_text: this.projectData.status_text || "",
     };
   }
-}
+};

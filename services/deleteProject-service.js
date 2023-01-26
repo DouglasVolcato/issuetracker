@@ -1,5 +1,5 @@
-import deleteProjectRepository from "../infra/repositories/project/deleteProject-repository";
+const deleteProjectRepository = require("../infra/repositories/project/deleteProject-repository");
 
-export default async function (projectId) {
+module.exports = async function (projectId) {
   return await deleteProjectRepository(projectId);
-}
+};

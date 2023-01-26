@@ -1,8 +1,8 @@
-import projects from "../../mocks/projects";
+const projects = require("../../mocks/projects");
 
-export default async function (project) {
+module.exports = async function (project) {
   return new Promise((resolve) => {
     projects.push(project);
     resolve(project);
   });
-}
+};

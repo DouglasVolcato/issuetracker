@@ -1,6 +1,6 @@
-import getProjectsService from "../services/getProjects-service";
+const getProjectsService = require("../services/getProjects-service");
 
-export default async function (req, res) {
+module.exports = async function (req, res) {
   const projects = await getProjectsService();
   res.status(200).send(projects);
-}
+};

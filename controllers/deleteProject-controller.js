@@ -1,7 +1,7 @@
-import deleteProjectService from "../services/deleteProject-service";
+const deleteProjectService = require("../services/deleteProject-service");
 
-export default async function (req, res) {
+module.exports = async function (req, res) {
   const projectId = req.body._id;
   const createdProject = await deleteProjectService(projectId);
   res.status(200).send(createdProject);
-}
+};

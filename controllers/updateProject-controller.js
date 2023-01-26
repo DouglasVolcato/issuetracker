@@ -1,7 +1,7 @@
-import updateProjectService from "../services/updateProject-service";
+const updateProjectService = require("../services/updateProject-service");
 
-export default async function (req, res) {
+module.exports = async function (req, res) {
   const update = req.body;
   const updated = await updateProjectService(update);
   res.status(200).send(updated);
-}
+};

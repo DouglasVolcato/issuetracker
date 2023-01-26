@@ -1,6 +1,6 @@
-import projects from "../../mocks/projects";
+const projects = require("../../mocks/projects");
 
-export default async function (project) {
+module.exports = async function (project) {
   return new Promise((resolve) => {
     for (let index = 0; index < projects.length; index++) {
       if (projects[index]._id === project._id) {
@@ -11,4 +11,4 @@ export default async function (project) {
       resolve(null);
     }
   });
-}
+};

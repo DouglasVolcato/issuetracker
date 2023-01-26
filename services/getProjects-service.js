@@ -1,5 +1,5 @@
-import getProjectsRepository from "../infra/repositories/project/getProjects-repository";
+const getProjectsRepository = require("../infra/repositories/project/getProjects-repository");
 
-export default async function () {
+module.exports = async function () {
   return await await getProjectsRepository();
-}
+};

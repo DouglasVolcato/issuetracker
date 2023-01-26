@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     _id: "5871dda29faedc3491ff93bb",
     issue_title: "Test project title",
