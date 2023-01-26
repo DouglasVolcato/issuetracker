@@ -7,7 +7,7 @@ module.exports = async function (projectId) {
         resolve(projects[index]);
         break;
       }
-      resolve(null);
     }
+    resolve(null);
   });
-}
+};
