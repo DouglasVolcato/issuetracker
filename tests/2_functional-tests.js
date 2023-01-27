@@ -1,10 +1,81 @@
-const chaiHttp = require('chai-http');
-const chai = require('chai');
+const chaiHttp = require("chai-http");
+const chai = require("chai");
 const assert = chai.assert;
-const server = require('../server');
+const server = require("../server");
 
 chai.use(chaiHttp);
 
-suite('Functional Tests', function() {
-  
+suite("GET", function () {
+  test("View issues on a project: GET request to /api/issues/apitest", function (done) {
+    chai
+      .request(server)
+      .get("/api/issues/apitest/")
+      .end(function (error, res) {
+        assert.equal(res.status, 200, "Response status should be 200");
+        assert.isArray(res.body, "Should return an array on success");
+        done();
+      });
+  });
+
+  test("View issues on a project: GET request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .get("/api/issues/5871dda29faedc3491ff93bb")
+      .end(function (error, res) {
+        assert.equal(res.status, 200, "Response status should be 200");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+});
+
+suite("POST", function () {
+  test("Create an issue with every field: POST request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .post("/api/issues/apitest")
+      .send({
+        issue_title: "Any_name",
+        issue_text: "Any_text",
+        created_by: "Any_author",
+        assigned_to: "Any_name",
+        status_text: "Any_statusText",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 201, "Response status should be 200");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Create an issue with only required fields: POST request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .post("/api/issues/apitest")
+      .send({
+        issue_title: "Any_name",
+        issue_text: "Any_text",
+        created_by: "Any_author",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 201, "Response status should be 201");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Create an issue with missing required fields: POST request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .post("/api/issues/apitest")
+      .send({
+        assigned_to: "Any_name",
+        status_text: "Any_statusText",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
 });
