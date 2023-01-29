@@ -79,3 +79,45 @@ suite("POST", function () {
       });
   });
 });
+
+suite("DELETE", function () {
+  test("Delete an issue: DELETE request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .delete("/api/issues/apitest")
+      .send({
+        _id: "5871dda29faedc3491ff93bb",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 200, "Response status should be 200");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Delete an issue with an invalid _id: DELETE request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .delete("/api/issues/apitest")
+      .send({
+        _id: "Wrong_Id",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Delete an issue with missing _id: DELETE request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .delete("/api/issues/apitest")
+      .send()
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+});
