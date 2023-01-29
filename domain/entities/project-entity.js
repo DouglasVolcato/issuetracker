@@ -23,10 +23,10 @@ module.exports = class {
     if (
       !this.projectData.issue_title &&
       !this.projectData.issue_text &&
-      this.projectData.created_by &&
-      this.projectData.assigned_to &&
-      this.projectData.open &&
-      this.projectData.status_text
+      !this.projectData.created_by &&
+      !this.projectData.assigned_to &&
+      !this.projectData.open &&
+      !this.projectData.status_text
     ) {
       throw new Error("no update field(s) sent");
     }
