@@ -80,6 +80,103 @@ suite("POST", function () {
   });
 });
 
+suite("PUT", function () {
+  test("Update one field on an issue: PUT request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .put("/api/issues/apitest")
+      .send({
+        _id: "5871dda29faedc3491ff93bb",
+        issue_title: "Updated_title",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 200, "Response status should be 200");
+        assert.isObject(res.body, "Should return an object");
+        assert.equal(
+          res.body.issue_title,
+          "Updated_title",
+          "Shound update issue title"
+        );
+        done();
+      });
+  });
+
+  test("Update multiple fields on an issue: PUT request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .put("/api/issues/apitest")
+      .send({
+        _id: "5871dda29faedc3491ff93bb",
+        issue_text: "Updated_text",
+        created_by: "Updated_author",
+        status_text: "Updated_statusText",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 200, "Response status should be 200");
+        assert.isObject(res.body, "Should return an object");
+        assert.equal(
+          res.body.issue_text,
+          "Updated_text",
+          "Shound update issue text"
+        );
+        assert.equal(
+          res.body.created_by,
+          "Updated_author",
+          "Shound update author"
+        );
+        assert.equal(
+          res.body.status_text,
+          "Updated_statusText",
+          "Shound update status text"
+        );
+        done();
+      });
+  });
+
+  test("Update an issue with missing _id: PUT request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .put("/api/issues/apitest")
+      .send({
+        issue_title: "Updated_title",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Update an issue with no fields to update: PUT request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .put("/api/issues/apitest")
+      .send({
+        _id: "5871dda29faedc3491ff93bb",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+
+  test("Update an issue with an invalid _id: PUT request to /api/issues/{project}", function (done) {
+    chai
+      .request(server)
+      .put("/api/issues/apitest")
+      .send({
+        _id: "Wrong_id",
+        issue_title: "Updated_title",
+      })
+      .end(function (error, res) {
+        assert.equal(res.status, 401, "Response status should be 401");
+        assert.isObject(res.body, "Should return an object");
+        done();
+      });
+  });
+});
+
 suite("DELETE", function () {
   test("Delete an issue: DELETE request to /api/issues/{project}", function (done) {
     chai
