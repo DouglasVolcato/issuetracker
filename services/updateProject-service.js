@@ -7,5 +7,10 @@ module.exports = async function (projectData) {
   const update = new ProjectEntity(projectData);
   update.validateFieldsUpdate();
   const updatedBody = update.getUpdateBody(foundProject);
-  return await updateProjectRepository(updatedBody);
+  const updatedProject = await updateProjectRepository(updatedBody);
+  if (updatedProject._id) {
+    return updatedProject;
+  } else {
+    throw new Error("Project not found.");
+  }
 };
