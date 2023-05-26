@@ -73,7 +73,7 @@ suite("POST", function () {
         status_text: "Any_statusText",
       })
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });
@@ -141,7 +141,7 @@ suite("PUT", function () {
         issue_title: "Updated_title",
       })
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });
@@ -155,7 +155,7 @@ suite("PUT", function () {
         _id: "5871dda29faedc3491ff93bb",
       })
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });
@@ -170,7 +170,7 @@ suite("PUT", function () {
         issue_title: "Updated_title",
       })
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });
@@ -200,7 +200,7 @@ suite("DELETE", function () {
         _id: "Wrong_Id",
       })
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });
@@ -212,7 +212,7 @@ suite("DELETE", function () {
       .delete("/api/issues/apitest")
       .send()
       .end(function (error, res) {
-        assert.equal(res.status, 401, "Response status should be 401");
+        assert.equal(res.status, 400, "Response status should be 400");
         assert.isObject(res.body, "Should return an object");
         done();
       });

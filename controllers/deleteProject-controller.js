@@ -6,6 +6,6 @@ module.exports = async function (req, res) {
     const createdProject = await deleteProjectService(projectId);
     res.status(200).send(createdProject);
   } catch (error) {
-    res.status(401).send({ error: error });
+    res.status(400).send({ error: error.message });
   }
 };

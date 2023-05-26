@@ -11,6 +11,6 @@ module.exports = async function (req, res) {
       res.status(200).send(projects);
     }
   } catch (error) {
-    res.status(401).send({ error: error });
+    res.status(400).send({ error: error.message });
   }
 };
